@@ -3,6 +3,7 @@ import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { User } from '../../interfaces/User';
 import { DUMMY_TASKS } from '../../constant/dummy-tasks';
+import { NewTask } from '../../interfaces/Task';
 
 @Component({
   selector: 'app-tasks',
@@ -29,6 +30,17 @@ export class TasksComponent {
   }
 
   onAddNewTaskDialogClose() {
+    this.isAddNewTaskDialogOpen = false;
+  }
+
+  onCreateTask(createdTask: NewTask) {
+    this.tasks.unshift({
+      id: Date.now().toString(),
+      userId: this.selectedUser.id,
+      title: createdTask.title,
+      summary: createdTask.summary,
+      dueDate: createdTask.dueDate,
+    });
     this.isAddNewTaskDialogOpen = false;
   }
 }
